@@ -1,0 +1,228 @@
+DDoS attack or Distributed Denial of Service attack is an attack aiming to destroy the service of a website by crashing its server by sending a lot of packets and requests to the server. The hackers usually use tools like the low orbit ion cannon, ping of death, SYN flood, HTTP flood & more.
+
+To conduct such a attack hackers require some really powerful computers with a really good internet connection around 220 Mbps or 300 Mbps of speed is minimum or you can have a lot of low or medium-performing computers with considerable internet speed.
+
+There are a lot of DDoS attacks out there but we are concentrating on some of the attacks and I will be telling you about the easiest way to set up a botnet.
+
+Topics to cover
+Types of DDoS attack
+Motivation
+Solution for the websites
+Scripts for a DDoS attack
+Set up a botnet
+Things to consider in a botnet
+Types of DDoS attack
+there are a lot of DDoS attacks out there we are going to discuss:-
+
+ICMP attack
+SYN flood attack
+HTTP flood attack
+Slowloris
+IP null attacks
+ICMP attack:-
+
+ICMP attack is an attack in which the attacker sends pings or Internet Control Messaging Protocol to send multiple requests to the server which completely drains the resources of the server causing it to restart or crash such a ping attack can be done on a windows system using the ping command.
+
+Usually, people use the ping command to check the signal strength. But hackers do things differently I meanly really for example:-
+
+Normal people:
+
+C:\WINDOWS\system32>ping www.google.com
+
+Pinging www.google.com [142.250.182.4] with 32 bytes of data:
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 142.250.182.4:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+What hackers do:
+
+C:\WINDOWS\system32>Ping www.google.com -l 65500
+
+Pinging www.google.com [142.250.182.4] with 65500 bytes of data:
+Request timed out.
+Request timed out.
+Request timed out.
+Request timed out.
+
+Ping statistics for 142.250.182.4:
+    Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
+You see the packet size over there is the max you can send the number is 65500 that's huge, think that you have 50 computer sending 1000 packets of that size its huge for any system to handle it will obviously crash the system.
+
+SYN flood attack:-
+
+An SYN flood attack is an attack that utilizes the age-old TCP communication known as the three-way handshake which is:-
+
+image
+In the above image, we can see that first, the client sends the SYN request to start a conversation, the server replies with an SYN/ACK to continue the conversation and the conversation is closed with the ACK.
+
+This the usual case of a regular TCP conversation between a server and a client, but what hackers do is that they just send the SYN request and leave the conversation making the conversation incomplete and this takes a lot of the system resources for the server to understand what is happening with it and in a scenario where a hacker is sending thousands of such requests from let's say 50 computers.
+
+That is serious trouble for the server that for shore will kill the service for the legitimate clients also.
+
+HTTP flood attack:-
+
+HTTP flood as the name suggests this attack is an application layer denial of service attack it basically sending a lot of packets to the server with the HTTP header which is completely legit packets with GET or POST request making it extremely resource exhausting for the server.
+
+In such a case, the attacker usually prefers a Linux system in which he can access the shell and can install the necessary programs he wants such as Python.
+
+In these attacks, the server cant find out all the necessary requests and fulfill them in time, and cant allocate the resources to other requests also eventually crashing it
+
+HTTP GET-DDoS attack: In this attack, the attacker is sending a huge number of GET requests like the user information downloading a lot of files from the website, when well synchronized this will make the server busy with the hacker and stop the actual user from getting any service.
+
+image
+HTTP POST-DDoS attack: In this attack, the attacker is sending a huge number of post requests like the user information, submitting a huge amount of forms to the website, when well synchronized this will make the server busy with the hacker and stop the actual user from getting any service. This is very similar to the GET-DDoS attack.
+
+image
+Slowloris:-
+
+Slowloris is one of the slowest but highly lethal attacks amongst the DDoS attacks out there generates a very low amount of packets that help it to escape the standard DDoS prevention tools. In the above HTTP flood attack, we see that there is a high flood of GETor POST requests which are terminated as per the three-way handshake or the SYN-ACK sequence the sequence with the communication ending with the ACK from the server closing the call but in case of the Slowloris, the ACK itself is terminated this makes the server wait for the call to end but it won't end.
+
+The server reduces the high requests by canceling them by the termination process but now as the communication is incomplete the server waits for the call to end and starts to allocate its resources to it but Slowloris sends thousands of such packets over the span of several minutes. Just like a slow poison slowly killing it similarly Slowloris crashes the server
+
+image
+IP null attack:-
+
+According to the RFC rules, the IP packet header should contain information on its transport-level protocol in the Protocol field. In case of an IP Null attack, the malefactors send packets containing the null values in this field. More often than not, the edge routers and firewalls will let such a packet in as an unclassified one. Though nowadays the null value in the Protocol field is reserved for IPv6 Hop-by-Hop Option (HOPOPT), not every server can receive and correctly process such a packet. And if such packets come in large quantities, their analysis will consume a large percentage of system resources, or exhaust them entirely and cause a server failure.
+
+This also comes with its own problems such as null routing your router can restrict any incoming traffic for that I found this excellent solution from stack exchange Falcon Momot:
+
+"If you null route an IP, obviously any traffic to that IP will become unrouteable. However, that does not extend to any other IP. Therefore, yes, even if that IP is on the same interface as some other IPs, if you are actually null-routing it, only that IP will be affected. Essentially, the process just publishes a route like
+
+192.0.2.14/32 via 0.0.0.0 metric 1
+So, you need to ensure that your service can still be accessed without this IP.
+
+DNS usually has an average convergence time of at least half the TTL set on your records. Consequently, if the TTL is long, caching nameservers and clients may remember and continue to use (or hand out, as the case may be) the null-routed IP. For this reason, you are likely to experience at least some downtime, but only respecting some hosts, and only if those hosts don't immediately try other IP addresses if the one chosen via RR doesn't get them connected to you.
+
+Since it sounds like your other IP addresses aren't already in DNS for your hostname, yes, you do need to put them there (as A records), and yes, you will experience downtime as the change propagates.
+
+Bear also in mind that, as mentioned in the comments to your question, the attacker will then trivially be able to discover your new address and attack that too (or instead)."
+
+Motivation
+For such an attack the main motivation is to destroy the victim's service providing capabilities well these might be the reasons for an attacker to do such an attack:
+
+To effect the business of the website mainly done by business rivals
+For completely stopping the service
+Hackers who are seriously bored and for fun, stop a server just to have fun.
+For testing the prevention mechanism.
+hackers are crazy people they do all kinds of weird stuff just for fun 😏😏😏🤗.
+
+solutions for website
+They're a bunch of solutions for websites by hiring an IT management to occupy a huge server these are the following solutions for websites:
+
+Organize a DDoS Attack Response Plan: Don’t be caught blindsided by DDoS attacks; have a response plan ready in case of a security breach so your organization can respond as promptly as possible. Your plan should document how to maintain business operations if a DDoS attack is successful, any technical competencies and expertise that will be necessary, and a systems checklist to ensure that your assets have advanced threat detection.
+Secure your Infrastructure with DDoS Attack Prevention Solutions: This may include prevention management systems that combine firewalls, VPN, anti-spam, content filtering, and other security layers to monitor activities and identity traffic inconsistencies that may be symptoms of DDoS attacks.
+Adopt Cloud-Based Service Providers. There are several benefits to outsourcing DDoS attack prevention to the cloud. Cloud providers who offer high levels of cybersecurity, including firewalls and threat monitoring software, can help protect your assets and network from DDoS criminals. The cloud also has greater bandwidth than most private networks, so it is likely to fail if under the pressure of increased DDoS attacks.
+copied directly from DSM.net link given below in the sources
+
+Scripts for DDoS attack
+There a lot of scripts out there that you can use for this purpose but I am going to explain some of them in this article. The scripts are:
+
+Memcrashed
+
+This tool allows you to send forged UDP packets to Memcached servers obtained from Shodan.io
+
+prerequisites are :
+
+python
+python-scapy
+python-shodan
+Linux machine
+installing
+
+First, install python 5
+
+sudo apt-get install python3 python3-pip
+After that install scapy and shodan
+
+pip3 install shodan
+
+pip3 install scapy
+After the installation now let us download the program Memcrashed
+
+First gitclone:
+
+git clone https://github.com/649/Memcrashed-DDoS-Exploit.git
+Now cd into the directory:
+
+cd Memcrashed-DDoS-Exploit
+Now enter the shodan API key insted the SHODAN_KEY:
+
+echo "SHODAN_KEY" > api.txt
+Run the tool:
+
+python5 memcrashed.py
+Saphyra:
+
+Saphyra is a tool that conducts DDoS attacks using the HTTP flood method.
+
+Installing is pretty straight forward just install python and the tool and you are ready to go:
+
+Install Python.
+
+sudo apt-get install python
+Download Saphyra.
+
+git clone https://github.com/laorynas/Saphyra.git
+Cd to the directory.
+
+cd /Saphyra/
+Run the code.
+
+python5 saphyra.py -h
+I am going to explain only two because almost all of them have the same or similar installation process.
+
+Set up BOTNET
+A BOTNET is a network of a huge number of computers that acts like a zombie doing whatever the hackers want it to do.
+
+A BOTNET is really easy to set up it can be done by one person or more than one person.
+
+Methods to set BOTNET:
+
+By the hackers initiative: The hacker can add additional computers or clusters of computers which he can use to do the hacking he wants to do. This is really costly but very effective, flexible but most of the time not affordable.
+By using BYOB: The BYOB project is a python program that helps to build your BOTNET this is really easy to build and easy to manage as it is a really interactive web interface
+Build BYOB 
+
+You need only 3 things for this the to work
+
+python
+BYOB open-source code
+windows machine
+downloading the git project
+
+Download the zip file and extract it on the desktop to simplify stuff. You can download it from the Github website
+
+run the web interface
+
+open the terminal or command prompt in the project folder and navigate to the web-ui page
+
+C:/Desktop/BOYB/> cd web-gui
+And now start the tool
+
+C:/Desktop/BOYB/web-gui/> python run.py
+tutorial video
+
+videos:
+
+https://www.youtube.com/watch?v=TBSh_w0I-z8
+https://www.youtube.com/watch?v=uVyniPrTzuk
+official article:
+
+Github
+securitynewspaper
+Things to consider in a botnet
+A BOTNET is a huge network of computers so these are the things to consider:
+
+Share and store data: Because of the huge amount of systems in the connection so you can store a lot of data in a decentralized way and increase space management efficiency.
+Steal the Zombies Data: If your bot is a victim of your social engineering attacks so you can even download or steal their data also.
+consider mainly Linux: Linux is a very preferred operating system as it makes it useful to install the hacking tools etc so it should be mainly considered.
+note
+If you have a BOTNET please do not use it for illegal purposes and not to stop websites for fun even though it is really entertaining to do that but also don't do it.
+
+source
+Radware(youtube tutorial)
+stack exchange(for the codes)
+DSM.net(for preventions)
+Github(for open source codes)
