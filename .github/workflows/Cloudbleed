@@ -1,0 +1,5 @@
+#  2021
+# im Fall, dass der af_-Präfix nächstes Jahr wiederverwendet wird
+rewrite ^/af_(whfefe|cloudbleed)$ /aprilfools-2017/$1.php last;
+rewrite ^/af_(whfefaq\.html)$ /aprilfools-2017/$1 last;
+#index /af_whfefe;
