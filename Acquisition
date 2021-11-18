@@ -1,0 +1,27 @@
+.acquisitions__acquisition {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.acquisitions__piece {
+  flex: 1;
+}
+
+.acquisitions__piece:last-child {
+  flex: 0;
+}
+
+.acquisitions__label {
+  font-size: var(--font-size-delta);
+}
+
+.acquisitions__value {
+  font-size: var(--font-size-charlie);
+  font-weight: bold;
+}
+
+.acquisitions__control {
+  font-size: var(--font-size-delta);
+  margin-left: var(--pad2);
+}
